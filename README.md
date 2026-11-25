@@ -56,7 +56,7 @@ flowchart LR
 
 1. **안경 (ESP32-S3)**: `ESP32-s3/secrets.example.h`를 `secrets.h`로 복사해 Wi-Fi 정보를 넣고 `code.cpp`를 업로드합니다. 시리얼 모니터에 카메라 주소가 나옵니다.
 2. **앱 주소 맞추기**: `ui/MainViewModel.kt`의 카메라 스트림(`:81/stream`)과 방위각(`/data`) 기본 주소를 안경의 IP로 바꿉니다.
-3. **경로 안내**: TMap 보행자 경로 API 앱 키가 필요합니다.
+3. **경로 안내**: TMap 보행자 경로 API 앱 키를 프로젝트 루트의 `local.properties`에 `TMAP_APP_KEY=발급받은_키`로 넣습니다. 이 파일은 git에 올라가지 않습니다.
 4. Android Studio로 열어 실행합니다. Android 7.0(API 24) 이상, 카메라·위치·마이크·진동 권한을 씁니다.
 
 YOLO 모델(`app/src/main/assets/yolov8n_int8.tflite`)은 저장소에 들어 있습니다.

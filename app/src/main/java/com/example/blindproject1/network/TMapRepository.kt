@@ -1,6 +1,7 @@
 package com.example.blindproject1.network
 
 import android.location.Location
+import com.example.blindproject1.BuildConfig
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,10 +18,14 @@ import java.net.URLEncoder
 class TMapRepository @Inject constructor() {
     
     private val client = OkHttpClient()
-    private val appKey = "YEWVxfrK4j8xTNQZURJ4z1Te4JTZs26v45fgmfn7"
+    private val appKey = BuildConfig.TMAP_APP_KEY
 
     suspend fun getPedestrianRoute(start: Location, destLat: Double, destLon: Double, startName: String, endName: String): List<Location> = withContext(Dispatchers.IO) {
         val waypoints = mutableListOf<Location>()
+        if (appKey.isBlank()) {
+            Log.e("TMapRepository", "TMAP_APP_KEY is not set in local.properties")
+            return@withContext waypoints
+        }
         try {
             val encodedStartName = URLEncoder.encode("출발지", "UTF-8")
             val encodedEndName = URLEncoder.encode("목적지", "UTF-8")
